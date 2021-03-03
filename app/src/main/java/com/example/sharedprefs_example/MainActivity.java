@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -19,7 +20,14 @@ public class MainActivity extends AppCompatActivity {
         Button button = findViewById(R.id.btn_save);
 
         SharedPreferences preferences = getSharedPreferences("MYPREFS", MODE_PRIVATE);
-        editText.setText(preferences.getString("myText", ""));
+        String text = preferences.getString("myText", "");
+
+        if(text.equals("")){
+            Toast.makeText(MainActivity.this, "Give me some text", Toast.LENGTH_LONG).show();
+        }
+        else{
+            editText.setText(text);
+        }
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
